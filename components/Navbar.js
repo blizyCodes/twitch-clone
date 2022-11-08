@@ -3,11 +3,11 @@ import Link from "next/link";
 import React, { Fragment } from "react";
 import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical, BsSearch } from "react-icons/bs";
 
 const Navbar = () => {
   return (
-    <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
+    <div className="fixed h-14 w-full flex  items-center p-4 bg-[#171718] mb-[2px] z-10">
       <div className="flex grow justify-start items-center">
         <Link href={"/"}>
           <Image src={logoPic} alt="logo picture" width={40} height={40} />
@@ -39,7 +39,7 @@ const Navbar = () => {
                       className={
                         active
                           ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
-                          : "text-gray-200 block px-4 py-2 text-sm"
+                          : "text-white-200 block px-4 py-2 text-sm"
                       }
                     >
                       Settings
@@ -53,7 +53,7 @@ const Navbar = () => {
                       className={
                         active
                           ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
-                          : "text-gray-200 block px-4 py-2 text-sm"
+                          : "text-white-200 block px-4 py-2 text-sm"
                       }
                     >
                       Support
@@ -67,7 +67,7 @@ const Navbar = () => {
                       className={
                         active
                           ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
-                          : "text-gray-200 block px-4 py-2 text-sm"
+                          : "text-white-200 block px-4 py-2 text-sm"
                       }
                     >
                       License
@@ -79,7 +79,20 @@ const Navbar = () => {
           </Transition>
         </Menu>
       </div>
-      {/* Middle */}
+      <div className="hidden md:flex grow-[2] items-center justify-center">
+        <div className="bg-gray-600 flex justify-center items-center max-w-sm m-auto p-2 rounded-3xl">
+          <div>
+            <input
+              type="text"
+              className="bg-transparent border-none focus:outline-none"
+              placeholder="Search.."
+            />
+          </div>
+          <div className="px-3">
+            <BsSearch />
+          </div>
+        </div>
+      </div>
       {/* Right  */}
     </div>
   );
