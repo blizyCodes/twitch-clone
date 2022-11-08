@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
+    <div className="h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
       {/* Left side */}
       <div className="flex grow justify-start items-center">
         <Link href={"/"} className="flex">
@@ -112,7 +112,7 @@ const Navbar = () => {
       {/*Right side*/}
       <div className="hidden md:flex grow items-center justify-end">
         <div className="flex items-center">
-          <Link href={"#"}>
+          <Link href={"/account"}>
             <button className="px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500">
               Account
             </button>
@@ -128,22 +128,22 @@ const Navbar = () => {
       <div
         className={
           showNav
-            ? "fixed top-0 left-0 w-full h-screen bg-[#171718] flex justify-center items-center ease-in duration-300 md:hidden"
+            ? "fixed top-0 left-0 w-full h-screen bg-[#181718] flex justify-center items-center ease-in duration-300 md:hidden"
             : "fixed top-[-100%] left-0 w-full h-screen bg-[#171718] flex justify-center items-center ease-in duration-300 md:hidden"
         }
       >
         <ul className="text-center">
-          <li className="p-4 text-3xl font-bold">
+          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
             <Link href={"/"}>Home</Link>
           </li>
-          <li className="p-4 text-3xl font-bold">
+          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
             <Link href={"/"}>Live Streams</Link>
           </li>
-          <li className="p-4 text-3xl font-bold">
+          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
             <Link href={"/"}>Top Categories</Link>
           </li>
-          <li className="p-4 text-3xl font-bold">
-            <Link href={"/"}>Account</Link>
+          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
+            <Link href={"/account"}>Account</Link>
           </li>
         </ul>
       </div>
