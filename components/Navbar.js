@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { Fragment } from "react";
 import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
-import { BsThreeDotsVertical, BsSearch } from "react-icons/bs";
+import { BsThreeDotsVertical, BsSearch, BsPerson } from "react-icons/bs";
 
 const Navbar = () => {
   return (
@@ -80,7 +80,7 @@ const Navbar = () => {
         </Menu>
       </div>
       <div className="hidden md:flex grow-[2] items-center justify-center">
-        <div className="bg-gray-600 flex justify-center items-center max-w-sm m-auto p-2 rounded-3xl">
+        <div className="bg-gray-600 flex justify-between items-center max-w-sm w-full m-auto p-2 rounded-3xl">
           <div>
             <input
               type="text"
@@ -89,11 +89,20 @@ const Navbar = () => {
             />
           </div>
           <div className="px-3">
-            <BsSearch />
+            <BsSearch size={20} />
           </div>
         </div>
       </div>
-      {/* Right  */}
+      <div className="hidden md:flex grow items-center justify-end">
+        <div className="flex items-center">
+          <Link href={"#"}>
+            <button className="px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500">
+              Account
+            </button>
+          </Link>
+          <BsPerson size={30} />
+        </div>
+      </div>
     </div>
   );
 };
