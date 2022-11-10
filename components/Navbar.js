@@ -1,13 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
 import { BsThreeDotsVertical, BsSearch, BsPerson } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import {
+  useSession,
+  useUser,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
+import { UserContext } from "../contexts/UserContext";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const session = useSession();
+  const user = useUser();
+  const supabase = useSupabaseClient();
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const { data, error, status } = await supabase
+          .from("profiles")
+          .select("username")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error && status != 406) throw error;
+
+        if (data) {
+          setLoggedInUser(data.username);
+        }
+      } catch (error) {
+        alert("Error loading user's account data");
+        console.log("error", error);
+      }
+    };
+
+    if (session) getProfile();
+  }, [session]);
+
+  // if (session) {
+  //   const {
+  //     user: {
+  //       user_metadata: { avatar_url, name: username },
+  //     },
+  //   } = session;
+  // }
 
   const toggleNav = () => {
     setShowNav(!showNav);
@@ -114,10 +155,74 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link href={"/account"}>
             <button className="px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500">
-              Account
+              {session ? loggedInUser : "Account"}
             </button>
           </Link>
-          <BsPerson size={30} />
+
+          {session ? (
+            <div className="p-4">
+              <Menu as="div" className="relative text-left">
+                <div className="flex">
+                  <Menu.Button>
+                    <Image
+                      className="rounded-full"
+                      src={session.user.user_metadata.avatar_url}
+                      alt="user avatar"
+                      width={40}
+                      height={40}
+                    />
+                  </Menu.Button>
+                </div>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition duration-100 ease-out"
+                  enterFrom="transform scale-95 opacity-0"
+                  enterTo="transform scale-100 opacity-100"
+                  leave="transition duration-75 ease-out"
+                  leaveFrom="transform scale-100 opacity-100"
+                  leaveTo="transform scale-95 opacity-0"
+                >
+                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none">
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="/account">
+                            <p
+                              className={
+                                active
+                                  ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
+                                  : "text-white-200 block px-4 py-2 text-sm"
+                              }
+                            >
+                              Account
+                            </p>
+                          </Link>
+                        )}
+                      </Menu.Item>
+
+                      <Menu.Item>
+                        {({ active }) => (
+                          <p
+                            onClick={() => supabase.auth.signOut()}
+                            className={
+                              active
+                                ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
+                                : "text-white-200 block px-4 py-2 text-sm"
+                            }
+                          >
+                            Logout
+                          </p>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+          ) : (
+            <BsPerson size={30} />
+          )}
         </div>
       </div>
       {/* Menu ham*/}
