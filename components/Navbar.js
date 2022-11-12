@@ -42,14 +42,6 @@ const Navbar = () => {
     if (session) getProfile();
   }, [session]);
 
-  // if (session) {
-  //   const {
-  //     user: {
-  //       user_metadata: { avatar_url, name: username },
-  //     },
-  //   } = session;
-  // }
-
   const toggleNav = () => {
     setShowNav(!showNav);
   };
@@ -68,7 +60,7 @@ const Navbar = () => {
           />
         </Link>
         <p className="p-4 text-xl">Browse</p>
-        <div className="p-4">
+        <div className="p-4 z-10">
           <Menu as="div" className="relative text-left">
             <div className="flex">
               <Menu.Button>

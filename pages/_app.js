@@ -8,6 +8,7 @@ import { UserContext } from "../contexts/UserContext";
 function MyApp({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
   const [loggedInUser, setLoggedInUser] = useState(null);
+
   return (
     <SessionContextProvider
       supabaseClient={supabaseClient}
