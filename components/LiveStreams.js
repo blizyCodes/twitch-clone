@@ -1,7 +1,6 @@
 import React from "react";
 import LiveStreamCard from "./LiveStreamCard";
 
-
 const LiveStreams = ({ streams }) => {
   return (
     <div className="">
@@ -9,7 +8,7 @@ const LiveStreams = ({ streams }) => {
         <span className="text-purple-500">Live Channels</span> we think you'll
         vibe with.
       </h2>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4 py-2">
+      <div className="pl-4 grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4 py-2">
         {streams.map((stream, index) => (
           <div key={index}>
             <LiveStreamCard

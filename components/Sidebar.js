@@ -24,7 +24,7 @@ const Sidebar = () => {
   }, [session]);
 
   return (
-    <div className="w-14 sm:w-16 xl:w-[15rem] h-screen p-2 bg-[#171718]">
+    <div className="fixed w-14 sm:w-16 xl:w-[15rem] h-screen p-2 bg-[#171718]">
       <div className="">
         <p className="hidden xl:flex uppercase py-4 pl-2 font-bold text-sm ">
           Recommended Channels

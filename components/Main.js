@@ -14,20 +14,20 @@ const Main = () => {
   const [categories, setcategories] = useState([]);
   const session = useSession();
 
+  const fetchData = async () => {
+    const [recStreamsData, categories] = await Promise.all([
+      selectRecMainStreams(),
+      selectCategories(),
+    ]);
+    setRecStreams(recStreamsData);
+    setcategories(categories);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const [recStreamsData, categories] = await Promise.all([
-        selectRecMainStreams(),
-        selectCategories(),
-      ]);
-      setRecStreams(recStreamsData);
-      setcategories(categories);
-    };
     fetchData();
   }, [session]);
   return (
-    <div className="pl-4 pt-4">
-      <SampleStream />
+    <div className="absolute left-[70px] xl:left-[260px]">
+      {/* <SampleStream /> */}
       <LiveStreams streams={recStreams} />
       <CategoriesIconBar />
       <Categories categories={categories} />

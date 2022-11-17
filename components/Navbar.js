@@ -15,7 +15,6 @@ import { UserContext } from "../contexts/UserContext";
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const session = useSession();
-  const user = useUser();
   const supabase = useSupabaseClient();
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
@@ -47,7 +46,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
+    <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
       {/* Left side */}
       <div className="flex grow justify-start items-center">
         <Link href={"/"} className="flex">
@@ -56,11 +55,11 @@ const Navbar = () => {
             alt="logo picture"
             width={40}
             height={40}
-            className="z-10"
+            className="z-20"
           />
         </Link>
         <p className="p-4 text-xl">Browse</p>
-        <div className="p-4 z-10">
+        <div className="p-4 ">
           <Menu as="div" className="relative text-left">
             <div className="flex">
               <Menu.Button>
