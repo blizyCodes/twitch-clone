@@ -8,9 +8,12 @@ import {
   BsSearch,
   BsPerson,
   BsChatSquare,
+  BsGlobe,
+  BsExclamationCircle,
 } from "react-icons/bs";
 import { BiCabinet } from "react-icons/bi";
-import { TbCrown } from "react-icons/tb";
+import { TbCrown, TbDiamonds } from "react-icons/tb";
+import { AiOutlineRight } from "react-icons/ai";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { UserContext } from "../contexts/UserContext";
 import MobileNavbar from "./MobileNavbar";
@@ -56,7 +59,14 @@ const Navbar = () => {
             className="z-20"
           />
         </Link>
-        <p className="p-4 text-xl">Browse</p>
+        {session && (
+          <p className="p-4 text-xl cursor-pointer hover:text-purple-500 ">
+            Following
+          </p>
+        )}
+        <p className="p-4 text-xl cursor-pointer text-purple-500 border-b-2 border-purple-500">
+          Browse
+        </p>
         <div className="p-4 ">
           <Menu as="div" className="relative text-left">
             <div className="flex">
@@ -126,12 +136,12 @@ const Navbar = () => {
       </div>
       {/*Middle stuff*/}
       <div className="hidden md:flex grow-[2] items-center justify-center">
-        <div className="bg-gray-600 flex justify-between items-center max-w-sm w-full m-auto p-2 rounded-3xl">
+        <div className="bg-gray-600 flex justify-between items-center max-w-sm w-full m-auto p-2 rounded-xl">
           <div>
             <input
               type="text"
               className="bg-transparent border-none focus:outline-none"
-              placeholder="Search.."
+              placeholder="Search"
             />
           </div>
           <div className="px-3">
@@ -140,12 +150,18 @@ const Navbar = () => {
         </div>
       </div>
       {/*Right side*/}
-      <div className="hidden md:flex grow items-center justify-between ">
+      <div className="hidden md:flex grow items-center">
         {session ? (
-          <div className="flex items-center ">
-            <TbCrown size={25} />
-            <BiCabinet size={25} />
-            <BsChatSquare size={20} />
+          <div className="ml-20 flex grow items-center justify-end gap-2">
+            <TbCrown size={25} className="cursor-pointer" />
+            <BiCabinet size={25} className="cursor-pointer" />
+            <BsChatSquare size={20} className="cursor-pointer" />
+            <Link href={"/"}>
+              <button className="flex items-center px-2 py-1 mx-1 rounded-md font-semibold bg-gray-700">
+                <TbDiamonds className="mx-1" />
+                Get Bits
+              </button>
+            </Link>
             <Menu as="div" className="relative text-left">
               <div className="flex">
                 <Menu.Button>
@@ -206,8 +222,8 @@ const Navbar = () => {
             </Menu>
           </div>
         ) : (
-          <div className="flex items-center">
-            <TbCrown size={25} />
+          <div className="ml-20 flex grow items-center justify-end gap-2">
+            <TbCrown size={25} className="cursor-pointer" />
             <Link href={"/account"}>
               <button className="px-2 py-1 mx-1 rounded-lg font-semibold bg-gray-700">
                 Log In
@@ -218,7 +234,74 @@ const Navbar = () => {
                 Sign Up
               </button>
             </Link>
-            <BsPerson size={30} />
+            <Menu as="div" className="relative text-left">
+              <div className="flex">
+                <Menu.Button>
+                  <BsPerson size={30} className="cursor-pointer" />
+                </Menu.Button>
+              </div>
+
+              <Transition
+                as={Fragment}
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none">
+                  <div className="py-1">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link href="/account">
+                          <div
+                            className={
+                              active
+                                ? "bg-purple-500 text-white-100 flex items-center gap-2 px-4 py-2 text-sm cursor-pointer"
+                                : "text-white-200 flex items-center gap-2 px-4 py-2 text-sm"
+                            }
+                          >
+                            <BsGlobe />
+                            Language
+                            <AiOutlineRight className="justify-self-end" />
+                          </div>
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          href={"/"}
+                          className={
+                            active
+                              ? "bg-purple-500 text-white-100 flex items-center gap-2 px-4 py-2 text-sm cursor-pointer"
+                              : "text-white-200 flex items-center gap-2 px-4 py-2 text-sm"
+                          }
+                        >
+                          <BsExclamationCircle />
+                          Cookie Preferences
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          href={"/account"}
+                          className={
+                            active
+                              ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
+                              : "text-white-200 block px-4 py-2 text-sm border-t border-gray-700"
+                          }
+                        >
+                          Log In
+                        </Link>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
           </div>
         )}
       </div>
