@@ -3,13 +3,15 @@ import Link from "next/link";
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
-import { BsThreeDotsVertical, BsSearch, BsPerson } from "react-icons/bs";
-
 import {
-  useSession,
-  useUser,
-  useSupabaseClient,
-} from "@supabase/auth-helpers-react";
+  BsThreeDotsVertical,
+  BsSearch,
+  BsPerson,
+  BsChatSquare,
+} from "react-icons/bs";
+import { BiCabinet } from "react-icons/bi";
+import { TbCrown } from "react-icons/tb";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { UserContext } from "../contexts/UserContext";
 import MobileNavbar from "./MobileNavbar";
 
@@ -138,79 +140,87 @@ const Navbar = () => {
         </div>
       </div>
       {/*Right side*/}
-      <div className="hidden md:flex grow items-center justify-end">
-        <div className="flex items-center">
-          <Link href={"/account"}>
-            <button className="px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500">
-              {session ? loggedInUser : "Account"}
-            </button>
-          </Link>
+      <div className="hidden md:flex grow items-center justify-between ">
+        {session ? (
+          <div className="flex items-center ">
+            <TbCrown size={25} />
+            <BiCabinet size={25} />
+            <BsChatSquare size={20} />
+            <Menu as="div" className="relative text-left">
+              <div className="flex">
+                <Menu.Button>
+                  <Image
+                    className="rounded-full"
+                    src={session.user.user_metadata.avatar_url}
+                    alt="user avatar"
+                    width={30}
+                    height={30}
+                  />
+                </Menu.Button>
+              </div>
 
-          {session ? (
-            <div className="p-4">
-              <Menu as="div" className="relative text-left">
-                <div className="flex">
-                  <Menu.Button>
-                    <Image
-                      className="rounded-full"
-                      src={session.user.user_metadata.avatar_url}
-                      alt="user avatar"
-                      width={40}
-                      height={40}
-                    />
-                  </Menu.Button>
-                </div>
-
-                <Transition
-                  as={Fragment}
-                  enter="transition duration-100 ease-out"
-                  enterFrom="transform scale-95 opacity-0"
-                  enterTo="transform scale-100 opacity-100"
-                  leave="transition duration-75 ease-out"
-                  leaveFrom="transform scale-100 opacity-100"
-                  leaveTo="transform scale-95 opacity-0"
-                >
-                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link href="/account">
-                            <p
-                              className={
-                                active
-                                  ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
-                                  : "text-white-200 block px-4 py-2 text-sm"
-                              }
-                            >
-                              Account
-                            </p>
-                          </Link>
-                        )}
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        {({ active }) => (
+              <Transition
+                as={Fragment}
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none">
+                  <div className="py-1">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link href="/account">
                           <p
-                            onClick={() => supabase.auth.signOut()}
                             className={
                               active
                                 ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
                                 : "text-white-200 block px-4 py-2 text-sm"
                             }
                           >
-                            Logout
+                            Account
                           </p>
-                        )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </div>
-          ) : (
+                        </Link>
+                      )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <p
+                          onClick={() => supabase.auth.signOut()}
+                          className={
+                            active
+                              ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm cursor-pointer"
+                              : "text-white-200 block px-4 py-2 text-sm"
+                          }
+                        >
+                          Logout
+                        </p>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
+        ) : (
+          <div className="flex items-center">
+            <TbCrown size={25} />
+            <Link href={"/account"}>
+              <button className="px-2 py-1 mx-1 rounded-lg font-semibold bg-gray-700">
+                Log In
+              </button>
+            </Link>
+            <Link href={"/account"}>
+              <button className="px-2 py-1 mx-1 rounded-lg font-semibold bg-purple-500">
+                Sign Up
+              </button>
+            </Link>
             <BsPerson size={30} />
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <MobileNavbar />
     </div>
