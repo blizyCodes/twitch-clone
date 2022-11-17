@@ -67,7 +67,7 @@ const LoggedOn = ({ supabase, session }) => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="">
+        <div className="pt-[56.25%]">
           <div className="m-5 flex flex-col justify-center items-center">
             {" "}
             <h2 className="text-2xl font-bold">

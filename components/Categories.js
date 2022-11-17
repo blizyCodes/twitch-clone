@@ -8,7 +8,7 @@ const Categories = ({ categories }) => {
         <span className="text-purple-500">Categories</span> we think you'll
         like.
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-2 py-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-7 gap-2 py-2">
         {categories.map((category, index) => (
           <CategoryCard
             key={index}

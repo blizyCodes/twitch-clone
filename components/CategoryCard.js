@@ -9,7 +9,7 @@ const CategoryCard = ({ img, title, viewers, tags }) => {
       <div>
         <p className="font-bold">{title}</p>
         <p className="text-sm text-gray-500 py-[2px]">{viewers}</p>
-        <div className="flex">
+        <div className=" md:flex items-center justify-start">
           <div>
             <p className="text-sm bg-gray-700 rounded-full inline-block p-[2px] px-3">
               {tagsArr[0]}

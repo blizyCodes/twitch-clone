@@ -26,8 +26,8 @@ const Main = () => {
     fetchData();
   }, [session]);
   return (
-    <div className="absolute left-[70px] xl:left-[260px]">
-      {/* <SampleStream /> */}
+    <div className="absolute left-[70px] right-[70px] xl:left-[260px]">
+      <SampleStream />
       <LiveStreams streams={recStreams} />
       <CategoriesIconBar />
       <Categories categories={categories} />

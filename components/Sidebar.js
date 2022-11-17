@@ -3,7 +3,7 @@ import { RiMovieLine } from "react-icons/ri";
 import React, { useEffect, useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
 import Image from "next/image";
-import { BsDot } from "react-icons/bs";
+import { BsDot, BsArrowBarLeft } from "react-icons/bs";
 
 const Sidebar = () => {
   const [recChannels, setRecChannels] = useState([]);
@@ -24,14 +24,15 @@ const Sidebar = () => {
   }, [session]);
 
   return (
-    <div className="fixed w-14 sm:w-16 xl:w-[15rem] h-screen p-2 bg-[#171718]">
-      <div className="">
+    <div className="fixed w-16 xl:w-[15rem] h-screen p-2 bg-[#171718]">
+      <div className="flex items-center justify-between">
         <p className="hidden xl:flex uppercase py-4 pl-2 font-bold text-sm ">
-          Recommended Channels
+          For You
         </p>
         <p className="">
           <RiMovieLine size={30} className="xl:hidden justify-center w-full" />
         </p>
+        <BsArrowBarLeft size={20} className="hidden xl:flex cursor-pointer" />
       </div>
       {recChannels.map((channel, index) => (
         <div key={index} className="inline-flex items-center py-1 w-full">
@@ -43,7 +44,7 @@ const Sidebar = () => {
               alt={channel.username}
             />
           </div>
-          <div className="hidden xl:flex justify-between w-full">
+          <div className="hidden xl:flex justify-between w-full cursor-pointer">
             <div>
               <p className="font-bold">{channel.username}</p>
               <p className="text-gray-400">{channel.game_name}</p>
@@ -63,7 +64,7 @@ const Sidebar = () => {
         </p>
       </div>
       {topChannels.map((channel, index) => (
-        <div key={index} className="inline-flex items-center py-1 w-full">
+        <div key={index} className="inline-flex items-center py-1 w-full ">
           <div>
             <Image
               src={channel.avatar}
@@ -72,7 +73,7 @@ const Sidebar = () => {
               alt={channel.username}
             />
           </div>
-          <div className="hidden xl:flex justify-between w-full">
+          <div className="hidden xl:flex justify-between w-full cursor-pointer">
             <div>
               <p className="font-bold">{channel.username}</p>
               <p className="text-gray-400">{channel.game_name}</p>
