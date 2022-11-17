@@ -4,16 +4,16 @@ import React, { Fragment, useState, useContext, useEffect } from "react";
 import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
 import { BsThreeDotsVertical, BsSearch, BsPerson } from "react-icons/bs";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+
 import {
   useSession,
   useUser,
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
 import { UserContext } from "../contexts/UserContext";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
-  const [showNav, setShowNav] = useState(false);
   const session = useSession();
   const supabase = useSupabaseClient();
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -40,10 +40,6 @@ const Navbar = () => {
 
     if (session) getProfile();
   }, [session]);
-
-  const toggleNav = () => {
-    setShowNav(!showNav);
-  };
 
   return (
     <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
@@ -216,33 +212,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {/* Menu ham*/}
-      <div onClick={toggleNav} className="md:hidden cursor-pointer z-10">
-        {showNav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
-      </div>
-      {/* Mobile Menu */}
-      <div
-        className={
-          showNav
-            ? "fixed top-0 left-0 w-full h-screen bg-[#181718] flex justify-center items-center ease-in duration-300 md:hidden"
-            : "fixed top-[-100%] left-0 w-full h-screen bg-[#171718] flex justify-center items-center ease-in duration-300 md:hidden"
-        }
-      >
-        <ul className="text-center">
-          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
-            <Link href={"/"}>Home</Link>
-          </li>
-          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
-            <Link href={"/"}>Live Streams</Link>
-          </li>
-          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
-            <Link href={"/"}>Top Categories</Link>
-          </li>
-          <li onClick={toggleNav} className="p-4 text-3xl font-bold">
-            <Link href={"/account"}>Account</Link>
-          </li>
-        </ul>
-      </div>
+      <MobileNavbar />
     </div>
   );
 };
