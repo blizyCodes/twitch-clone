@@ -3,7 +3,7 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Loading = () => {
   return (
-    <div className="pt-[120px]">
+    <div className="pt-[55px] flex items-center justify-center">
       <PacmanLoader color="#A855F7" />
     </div>
   );

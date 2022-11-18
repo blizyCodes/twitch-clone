@@ -17,25 +17,32 @@ import { AiOutlineRight } from "react-icons/ai";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { UserContext } from "../contexts/UserContext";
 import MobileNavbar from "./MobileNavbar";
+import unknownUser from "../public/assets/user.jpg";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const Navbar = () => {
+  const user = useUser();
   const session = useSession();
   const supabase = useSupabaseClient();
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const { loggedInUserAvatar, setLoggedInUserAvatar } = useContext(UserContext);
 
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const { data, error, status } = await supabase
+        const {
+          data: { avatar_url },
+          error,
+          status,
+        } = await supabase
           .from("profiles")
-          .select("username")
-          .eq("id", session.user.id)
+          .select("avatar_url")
+          .eq("id", user.id)
           .single();
 
         if (error && status != 406) throw error;
 
-        if (data) {
-          setLoggedInUser(data.username);
+        if (avatar_url) {
+          setLoggedInUserAvatar(avatar_url);
         }
       } catch (error) {
         alert("Error loading user's account data");
@@ -44,7 +51,7 @@ const Navbar = () => {
     };
 
     if (session) getProfile();
-  }, [session]);
+  }, [session, loggedInUserAvatar]);
 
   return (
     <div className="fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#171718] mb-[2px] z-10">
@@ -167,7 +174,7 @@ const Navbar = () => {
                 <Menu.Button>
                   <Image
                     className="rounded-full"
-                    src={session.user.user_metadata.avatar_url}
+                    src={loggedInUserAvatar ? loggedInUserAvatar : unknownUser}
                     alt="user avatar"
                     width={30}
                     height={30}

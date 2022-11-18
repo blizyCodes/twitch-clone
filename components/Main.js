@@ -8,29 +8,49 @@ import {
 import SampleStream from "./SampleStream";
 import CategoriesIconBar from "./CategoriesIconBar";
 import Categories from "./Categories";
+import Loading from "./Loading";
 
 const Main = () => {
   const [recStreams, setRecStreams] = useState([]);
   const [categories, setcategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const session = useSession();
 
   const fetchData = async () => {
-    const [recStreamsData, categories] = await Promise.all([
-      selectRecMainStreams(),
-      selectCategories(),
-    ]);
-    setRecStreams(recStreamsData);
-    setcategories(categories);
+    try {
+      setLoading(true);
+
+      const [recStreamsData, categories] = await Promise.all([
+        selectRecMainStreams(),
+        selectCategories(),
+      ]);
+      setRecStreams(recStreamsData);
+      setcategories(categories);
+    } catch (error) {
+      alert("Error loading stream data");
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   useEffect(() => {
     fetchData();
   }, [session]);
+
   return (
     <div className="absolute left-[70px] right-[70px] xl:left-[260px]">
-      <SampleStream />
-      <LiveStreams streams={recStreams} />
-      <CategoriesIconBar />
-      <Categories categories={categories} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          {" "}
+          <SampleStream />
+          <LiveStreams streams={recStreams} />
+          <CategoriesIconBar />
+          <Categories categories={categories} />
+        </div>
+      )}
     </div>
   );
 };

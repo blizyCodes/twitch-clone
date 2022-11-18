@@ -3,7 +3,7 @@ import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 
 const Login = ({ supabase }) => {
   return (
-    <div className="pt-[16.25%]">
+    <div className="pt-[80px]">
       <Auth
         providers={["google", "github"]}
         supabaseClient={supabase}
