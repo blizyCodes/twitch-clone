@@ -8,13 +8,21 @@ import { UserContext } from "../contexts/UserContext";
 function MyApp({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
   const [loggedInUserAvatar, setLoggedInUserAvatar] = useState(null);
+  const [loggedInUser, setloggedInUser] = useState(null);
 
   return (
     <SessionContextProvider
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <UserContext.Provider value={{ loggedInUserAvatar, setLoggedInUserAvatar }}>
+      <UserContext.Provider
+        value={{
+          loggedInUserAvatar,
+          setLoggedInUserAvatar,
+          loggedInUser,
+          setloggedInUser,
+        }}
+      >
         <Navbar />
         <Component {...pageProps} />
       </UserContext.Provider>

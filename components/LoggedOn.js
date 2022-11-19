@@ -1,16 +1,21 @@
-import Image from "next/image";
 import { useState, useEffect, useContext } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
-import Loading from "./Loading";
 import { UserContext } from "../contexts/UserContext";
 import unknownUser from "../public/assets/user.jpg";
+import Image from "next/image";
+import Loading from "./Loading";
 
 const LoggedOn = ({ supabase, session }) => {
   const user = useUser();
+  const {
+    loggedInUserAvatar,
+    setLoggedInUserAvatar,
+    loggedInUser,
+    setloggedInUser,
+  } = useContext(UserContext);
+
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
-  const [newUsername, setNewUsername] = useState(username);
-  const { loggedInUserAvatar, setLoggedInUserAvatar } = useContext(UserContext);
+  const [newUsername, setNewUsername] = useState(loggedInUser);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const getProfile = async () => {
@@ -26,8 +31,8 @@ const LoggedOn = ({ supabase, session }) => {
       if (error && status != 406) throw error;
 
       if (data) {
-        if (data.username) setUsername(data.username);
-        else setUsername(data.full_name);
+        if (data.username) setloggedInUser(data.username);
+        else setloggedInUser(data.full_name);
         setLoggedInUserAvatar(data.avatar_url);
       }
     } catch (error) {
@@ -42,47 +47,70 @@ const LoggedOn = ({ supabase, session }) => {
     try {
       setLoading(true);
 
-      let avatarFinal = loggedInUserAvatar;
+      let avatarFinalUrl = loggedInUserAvatar;
 
       if (selectedImage) {
+        //create filename/path info
         const file = selectedImage;
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${new Date().toISOString()}.${fileExt}`;
+        const fileExtension = file.name.split(".").pop();
+        const fileName = `${new Date().toISOString()}.${fileExtension}`;
         const filePath = `${user.id}/${fileName}`;
 
+        //call supabase api - LIST all files in user's folder
+        const { error: listError, data: files } = await supabase.storage
+          .from("avatars")
+          .list(user.id);
+
+        //create an array of filepaths for all files found above
+        const filesToDelete = files.map((file) => `${user.id}/${file.name}`);
+
+        //call supabase api - DELETE all the above files
+        const { error: deleteError } = await supabase.storage
+          .from("avatars")
+          .remove(filesToDelete);
+
+        //call supabase api - UPLOAD new selected image
         let { error: uploadError } = await supabase.storage
           .from("avatars")
           .upload(filePath, file, { upsert: true });
 
-        if (uploadError) throw uploadError;
+        //throw error if any of above errored
+        if (listError || deleteError || uploadError)
+          throw listError || deleteError || uploadError;
 
+        //GET newly uploaded image's public URL
         const { data } = supabase.storage
           .from("avatars")
           .getPublicUrl(filePath);
 
-        avatarFinal = data.publicUrl;
+        //replace the constant initialised earlier
+        avatarFinalUrl = data.publicUrl;
       }
 
+      //create updates object with everything to be send to DB
       const updates = {
         id: user.id,
         username: newUsername,
         updated_at: new Date().toISOString(),
-        avatar_url: avatarFinal,
+        avatar_url: avatarFinalUrl,
       };
 
+      //call supabase api - push updates while replacing current ones if existing
       let { error } = await supabase.from("profiles").upsert(updates);
 
       if (error) throw error;
 
-      setUsername(newUsername);
-      setLoggedInUserAvatar(avatarFinal);
+      //set username and avatarURL through the context setstates
+      setloggedInUser(newUsername);
+      setLoggedInUserAvatar(avatarFinalUrl);
 
       alert("Profile updated!");
     } catch (error) {
       console.log(error);
-      alert("Error updating the profile data!");
+      alert("Error updating the profile data! Please try again later.");
     } finally {
       setLoading(false);
+      setSelectedImage(null);
     }
   };
 
@@ -96,10 +124,11 @@ const LoggedOn = ({ supabase, session }) => {
         <Loading />
       ) : (
         <div className="pt-[55px]">
+          {/* TOP PART */}
           <div className="m-5 flex flex-col justify-center items-center">
             {" "}
             <h2 className="text-2xl font-bold">
-              Welcome <span className="text-[#A855F7]">{username}</span>
+              Welcome <span className="text-[#A855F7]">{loggedInUser}</span>
             </h2>
             <div className="py-4 m-auto">
               <Image
@@ -117,7 +146,8 @@ const LoggedOn = ({ supabase, session }) => {
               Sign out
             </button>
           </div>
-          <h2 className="underline font-bold text-center pt-12 m-4">
+          {/* MIDDLE PART */}
+          <h2 className="underline font-bold text-center pt-12 m-4 border-t border-gray-700">
             Update Username
           </h2>
           <div className="grid grid-cols-2 gap-4">
@@ -141,14 +171,15 @@ const LoggedOn = ({ supabase, session }) => {
                   id="username"
                   className="bg-gray-600 p-2 rounded-xl"
                   type="text"
-                  value={newUsername || username || ""}
+                  value={newUsername || loggedInUser || ""}
                   onChange={(e) => {
                     setNewUsername(e.target.value);
                   }}
                 />
               </div>
+              {/* BOTTOM PART */}
               <div className="pt-10">
-                <h2 className="underline font-bold text-center pt-12 m-4">
+                <h2 className="underline font-bold text-center pt-12 m-4 border-t border-gray-700">
                   Upload Your avatar
                 </h2>
                 {selectedImage && (
@@ -171,6 +202,7 @@ const LoggedOn = ({ supabase, session }) => {
                   type="file"
                   name="myImage"
                   className="bg-gray-600 p-2 rounded-xl"
+                  accept=".png,.jpg"
                   onChange={(event) => {
                     setSelectedImage(event.target.files[0]);
                   }}

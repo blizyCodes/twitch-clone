@@ -9,11 +9,6 @@ export const selectRecChannels = async () => {
   return data;
 };
 
-// export const selectAllChannels = async () => {
-//   const { data, error, status } = await supabase.from("mock_data").select();
-//   return data;
-// };
-
 export const selectTopChannels = async () => {
   const { data, error, status } = await supabase
     .from("mock_data")
