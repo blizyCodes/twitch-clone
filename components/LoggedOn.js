@@ -60,14 +60,18 @@ const LoggedOn = ({ supabase, session }) => {
         const { error: listError, data: files } = await supabase.storage
           .from("avatars")
           .list(user.id);
+          
+        if (files.length > 0) {
+          //create an array of filepaths for all files found above
+          const filesToDelete = files.map((file) => `${user.id}/${file.name}`);
 
-        //create an array of filepaths for all files found above
-        const filesToDelete = files.map((file) => `${user.id}/${file.name}`);
+          //call supabase api - DELETE all the above files
+          const { error: deleteError } = await supabase.storage
+            .from("avatars")
+            .remove(filesToDelete);
 
-        //call supabase api - DELETE all the above files
-        const { error: deleteError } = await supabase.storage
-          .from("avatars")
-          .remove(filesToDelete);
+          if (deleteError) throw deleteError;
+        }
 
         //call supabase api - UPLOAD new selected image
         let { error: uploadError } = await supabase.storage
@@ -75,8 +79,7 @@ const LoggedOn = ({ supabase, session }) => {
           .upload(filePath, file, { upsert: true });
 
         //throw error if any of above errored
-        if (listError || deleteError || uploadError)
-          throw listError || deleteError || uploadError;
+        if (listError || uploadError) throw listError || uploadError;
 
         //GET newly uploaded image's public URL
         const { data } = supabase.storage
@@ -86,7 +89,6 @@ const LoggedOn = ({ supabase, session }) => {
         //replace the constant initialised earlier
         avatarFinalUrl = data.publicUrl;
       }
-
       //create updates object with everything to be send to DB
       const updates = {
         id: user.id,
