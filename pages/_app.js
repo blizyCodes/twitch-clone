@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar";
-import "../styles/globals.css";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 import { UserContext } from "../contexts/UserContext";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());

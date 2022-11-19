@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
+import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import unknownUser from "../public/assets/user.jpg";
-import Image from "next/image";
 import Loading from "./Loading";
 
 const LoggedOn = ({ supabase, session }) => {
@@ -60,7 +60,7 @@ const LoggedOn = ({ supabase, session }) => {
         const { error: listError, data: files } = await supabase.storage
           .from("avatars")
           .list(user.id);
-          
+
         if (files.length > 0) {
           //create an array of filepaths for all files found above
           const filesToDelete = files.map((file) => `${user.id}/${file.name}`);

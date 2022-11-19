@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import LiveStreams from "./LiveStreams";
 import { useSession } from "@supabase/auth-helpers-react";
+import React, { useEffect, useState } from "react";
 import {
   selectCategories,
   selectRecMainStreams,
 } from "../utils/channelsModels";
-import SampleStream from "./SampleStream";
-import CategoriesIconBar from "./CategoriesIconBar";
+import Carousel from "./Carousel";
 import Categories from "./Categories";
+import CategoriesIconBar from "./CategoriesIconBar";
+import LiveStreams from "./LiveStreams";
 import Loading from "./Loading";
 
 const Main = () => {
@@ -43,9 +43,9 @@ const Main = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div>
-          {" "}
-          <SampleStream />
+        <div className="pl-[20px]">
+          {/* <SampleStream /> */}
+          <Carousel />
           <LiveStreams streams={recStreams} />
           <CategoriesIconBar />
           <Categories categories={categories} />

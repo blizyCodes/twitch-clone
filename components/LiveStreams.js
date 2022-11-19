@@ -3,7 +3,7 @@ import LiveStreamCard from "./LiveStreamCard";
 
 const LiveStreams = ({ streams }) => {
   return (
-    <div className="p-2 md:p-8">
+    <div id="livestreams" className="p-2 md:p-8">
       <h2 className="font-bold px-2 py-2 md:text-xl border-t border-gray-700">
         <span className="text-purple-500">Live Channels</span> we think you'll
         like

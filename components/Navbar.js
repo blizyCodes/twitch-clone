@@ -1,24 +1,27 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { Fragment, useState, useContext, useEffect } from "react";
-import logoPic from "../public/assets/bubble-logo.png";
 import { Menu, Transition } from "@headlessui/react";
 import {
-  BsThreeDotsVertical,
-  BsSearch,
-  BsPerson,
-  BsChatSquare,
-  BsGlobe,
-  BsExclamationCircle,
-} from "react-icons/bs";
-import { BiCabinet } from "react-icons/bi";
-import { TbCrown, TbDiamonds } from "react-icons/tb";
+  useSession,
+  useSupabaseClient,
+  useUser,
+} from "@supabase/auth-helpers-react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { Fragment, useContext, useEffect } from "react";
 import { AiOutlineRight } from "react-icons/ai";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { BiCabinet } from "react-icons/bi";
+import {
+  BsChatSquare,
+  BsExclamationCircle,
+  BsGlobe,
+  BsPerson,
+  BsSearch,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
+import { TbCrown, TbDiamonds } from "react-icons/tb";
 import { UserContext } from "../contexts/UserContext";
-import MobileNavbar from "./MobileNavbar";
+import logoPic from "../public/assets/bubble-logo.png";
 import unknownUser from "../public/assets/user.jpg";
-import { useUser } from "@supabase/auth-helpers-react";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
   const user = useUser();
