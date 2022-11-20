@@ -1,12 +1,7 @@
 import Head from "next/head";
-import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Layout from "../components/Layout";
 
 export default function Home() {
-  const session = useSession();
-  const supabase = useSupabaseClient();
-
   return (
     <div className="index">
       <Head>

@@ -55,8 +55,8 @@ const Carousel = () => {
         <div className="relative overflow-hidden w-full  pt-[56.25%] hover:scale-105 ease-in duration-300">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/Nfpyb_bz52Q?autoplay=1&mute=1"
-            title="T1 vs DRX Worlds 2022 Final Minutes Reaction | Sykkuno, Doublelift, Timmy and Brodin"
+            src="https://www.youtube.com/embed/SLLEbid7lQU?autoplay=1&mute=1"
+            title="TEKKEN 7: SPEEDKICKS VS. KIT | LIL MAJIN | Top 8 | CEO 2016"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -65,14 +65,14 @@ const Carousel = () => {
             live
           </div>
           <div className="absolute bottom-2 left-2 px-4 py-2 bg-black/60">
-            Viewers: 472K
+            Viewers: 652K
           </div>
         </div>
         <div className="relative overflow-hidden w-full  pt-[56.25%] hover:scale-105 ease-in duration-300">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/Nfpyb_bz52Q?autoplay=1&mute=1"
-            title="T1 vs DRX Worlds 2022 Final Minutes Reaction | Sykkuno, Doublelift, Timmy and Brodin"
+            src="https://www.youtube.com/embed/2-nkABqpV44?autoplay=1&mute=1"
+            title="1200HP Toyota Supra - Forza Horizon 5 | Thrustmaster TX gameplay"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -81,14 +81,14 @@ const Carousel = () => {
             live
           </div>
           <div className="absolute bottom-2 left-2 px-4 py-2 bg-black/60">
-            Viewers: 472K
+            Viewers: 102K
           </div>
         </div>
         <div className="relative overflow-hidden w-full  pt-[56.25%] hover:scale-105 ease-in duration-300">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/Nfpyb_bz52Q?autoplay=1&mute=1"
-            title="T1 vs DRX Worlds 2022 Final Minutes Reaction | Sykkuno, Doublelift, Timmy and Brodin"
+            src="https://www.youtube.com/embed/wt1NDhfd2ks?autoplay=1&mute=1"
+            title="BEST CSGO MOMENTS OF 2022!!"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -97,14 +97,14 @@ const Carousel = () => {
             live
           </div>
           <div className="absolute bottom-2 left-2 px-4 py-2 bg-black/60">
-            Viewers: 472K
+            Viewers: 985K
           </div>
         </div>
         <div className="relative overflow-hidden w-full  pt-[56.25%] hover:scale-105 ease-in duration-300">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/Nfpyb_bz52Q?autoplay=1&mute=1"
-            title="T1 vs DRX Worlds 2022 Final Minutes Reaction | Sykkuno, Doublelift, Timmy and Brodin"
+            src="https://www.youtube.com/embed/VwHho7T3eSE?autoplay=1&mute=1"
+            title="Streaming till I perish (Minecraft 1.18 Hardcore)"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -113,7 +113,7 @@ const Carousel = () => {
             live
           </div>
           <div className="absolute bottom-2 left-2 px-4 py-2 bg-black/60">
-            Viewers: 472K
+            Viewers: 336K
           </div>
         </div>
       </Slider>

@@ -106,35 +106,35 @@ const Navbar = () => {
                             : "text-white-200 block px-4 py-2 text-sm"
                         }
                       >
+                        About
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="#"
+                        className={
+                          active
+                            ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
+                            : "text-white-200 block px-4 py-2 text-sm"
+                        }
+                      >
+                        Partners
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="#"
+                        className={
+                          active
+                            ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
+                            : "text-white-200 block px-4 py-2 text-sm"
+                        }
+                      >
                         Settings
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        href="#"
-                        className={
-                          active
-                            ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
-                            : "text-white-200 block px-4 py-2 text-sm"
-                        }
-                      >
-                        Support
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        href="#"
-                        className={
-                          active
-                            ? "bg-purple-500 text-white-100 block px-4 py-2 text-sm"
-                            : "text-white-200 block px-4 py-2 text-sm"
-                        }
-                      >
-                        License
                       </Link>
                     )}
                   </Menu.Item>

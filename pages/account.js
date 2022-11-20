@@ -1,7 +1,7 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Login from "../components/Login";
 import Head from "next/head";
 import LoggedOn from "../components/LoggedOn";
+import Login from "../components/Login";
 
 const Account = () => {
   const session = useSession();
