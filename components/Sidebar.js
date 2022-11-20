@@ -1,9 +1,9 @@
-import { selectRecChannels, selectTopChannels } from "../utils/channelsModels";
-import { RiMovieLine } from "react-icons/ri";
-import React, { useEffect, useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
 import Image from "next/image";
-import { BsDot, BsArrowBarLeft } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
+import { BsArrowBarLeft, BsDot } from "react-icons/bs";
+import { RiMovieLine } from "react-icons/ri";
+import { selectRecChannels, selectTopChannels } from "../utils/channelsModels";
 
 const Sidebar = () => {
   const [recChannels, setRecChannels] = useState([]);
@@ -35,7 +35,10 @@ const Sidebar = () => {
         <BsArrowBarLeft size={20} className="hidden xl:flex cursor-pointer" />
       </div>
       {recChannels.map((channel, index) => (
-        <div key={index} className="inline-flex items-center py-1 w-full">
+        <div
+          key={index}
+          className="inline-flex items-center py-1 w-full hover:scale-105 ease-in duration-300"
+        >
           <div>
             <Image
               src={channel.avatar}
@@ -64,7 +67,10 @@ const Sidebar = () => {
         </p>
       </div>
       {topChannels.map((channel, index) => (
-        <div key={index} className="inline-flex items-center py-1 w-full ">
+        <div
+          key={index}
+          className="inline-flex items-center py-1 w-full hover:scale-105 ease-in duration-300 "
+        >
           <div>
             <Image
               src={channel.avatar}

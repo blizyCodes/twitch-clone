@@ -10,7 +10,7 @@ const LiveStreamCard = ({
   viewers,
 }) => {
   return (
-    <div className="p-2 ">
+    <div className="p-2 hover:scale-105 ease-in duration-300 cursor-pointer">
       <div className="relative">
         <Image src={streamPic} width={440} height={248} alt={streamer} />
         <div className="absolute bottom-2 left-2 bg-black/60">

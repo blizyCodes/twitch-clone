@@ -4,7 +4,7 @@ import React from "react";
 const CategoryCard = ({ img, title, viewers, tags }) => {
   const tagsArr = tags.split(",");
   return (
-    <div className="p-2">
+    <div className="p-2 hover:scale-105 ease-in duration-300 cursor-pointer">
       <Image src={img} width="261" height="350" alt="/" />
       <div>
         <p className="font-bold">{title}</p>
