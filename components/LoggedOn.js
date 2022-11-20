@@ -186,9 +186,10 @@ const LoggedOn = ({ supabase, session }) => {
                 </h2>
                 {selectedImage && (
                   <div>
-                    <img
+                    <Image
                       alt="not fount"
-                      width={"100px"}
+                      width={100}
+                      height={100}
                       src={URL.createObjectURL(selectedImage)}
                     />
                     <br />
@@ -212,8 +213,8 @@ const LoggedOn = ({ supabase, session }) => {
               </div>
             </div>
 
-            <div className="col-span-2 pt-20">
-              <div className="flex justify-end items-center">
+            <div className="col-span-2 pt-10">
+              <div className="flex justify-end items-center pb-4">
                 <button
                   className=" px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500"
                   onClick={() => updateProfile()}
