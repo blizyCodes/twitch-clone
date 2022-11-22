@@ -216,9 +216,12 @@ const LoggedOn = ({ supabase, session }) => {
             <div className="col-span-2 pt-10">
               <div className="flex justify-end items-center pb-4">
                 <button
-                  className=" px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500"
+                  className=" px-4 py-2 mx-1 rounded-lg font-bold bg-purple-500 disabled:bg-gray-500"
                   onClick={() => updateProfile()}
-                  disabled={loading}
+                  disabled={
+                    (newUsername === loggedInUser && selectedImage === null) ||
+                    (newUsername === "" && selectedImage === null)
+                  }
                 >
                   {loading ? "Loading ..." : "Update Profile"}
                 </button>
