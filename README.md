@@ -2,6 +2,7 @@
 
 This is a web application which was created while exploring NextJS and Supabase while also practicing my Tailwind skills.
 There is not a lot of functionality yet as my main goal was to understand NextJS and how Supabase can be integrated as a Backend As a Service tool.
+For the real thing please browse [Twitch](https://www.twitch.tv/).
 
 I do not own any of the media used and they were used for the sole purpose of practicing and learning.
 
