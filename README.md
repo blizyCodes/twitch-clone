@@ -1,25 +1,34 @@
-# Twitch Clone
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-This is a web application which was created while exploring NextJS and Supabase while also practicing my Tailwind skills. 
-There is not a lot of functionality yet as my main goal was to understand NextJS and how Supabase can be integrated as a Backend As a Service tool. 
+## Getting Started
 
-I do not own any of the media used and they were used for the sole purpose of practicing and learning.   
+First, run the development server:
 
-## Link to deployed version
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-https://twitch-clone-two.vercel.app/
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Tech Stack
-- [NextJS](https://nextjs.org/) - ReactJS framework
-- [Supabase](https://supabase.com/) - for both API and PostgreSQL Database
-- [Tailwind CSS](https://tailwindcss.com/) - utility first CSS framework
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-## Features
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-The Twitch Clone App contains the below features and functionality:
+## Learn More
 
-- A user can browse without authentication. 
-- A user can register/log in using email, GitHub or Google sign in. 
-- A user can change their username and their avatar.
-- The app is fully responsive for mobiles and desktops. 
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
