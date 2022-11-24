@@ -1,6 +1,7 @@
 import { useSession } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
 import {
+  selectCarouselStreams,
   selectCategories,
   selectRecMainStreams,
 } from "../utils/channelsModels";
@@ -13,6 +14,7 @@ import Loading from "./Loading";
 const Main = () => {
   const [recStreams, setRecStreams] = useState([]);
   const [categories, setcategories] = useState([]);
+  const [carouselStreams, setCarouselStreams] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
 
@@ -20,12 +22,15 @@ const Main = () => {
     try {
       setLoading(true);
 
-      const [recStreamsData, categories] = await Promise.all([
-        selectRecMainStreams(),
-        selectCategories(),
-      ]);
+      const [recStreamsData, categories, carouselStreamsData] =
+        await Promise.all([
+          selectRecMainStreams(),
+          selectCategories(),
+          selectCarouselStreams(),
+        ]);
       setRecStreams(recStreamsData);
       setcategories(categories);
+      setCarouselStreams(carouselStreamsData);
     } catch (error) {
       alert("Error loading stream data");
       console.log("error", error);
@@ -45,7 +50,7 @@ const Main = () => {
       ) : (
         <div className="pl-[20px]">
           {/* <SampleStream /> */}
-          <Carousel />
+          <Carousel streams={carouselStreams} />
           <LiveStreams streams={recStreams} />
           <CategoriesIconBar />
           <Categories categories={categories} />

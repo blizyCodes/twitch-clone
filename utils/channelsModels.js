@@ -27,3 +27,10 @@ export const selectCategories = async () => {
   const { data, error, status } = await supabase.from("categories").select();
   return data;
 };
+
+export const selectCarouselStreams = async () => {
+  const { data, error, status } = await supabase
+    .from("carousel_streams")
+    .select();
+  return data;
+};
