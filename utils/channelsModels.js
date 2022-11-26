@@ -5,7 +5,7 @@ export const selectRecChannels = async () => {
     .from("mock_data")
     .select()
     .order("username")
-    .limit(9);
+    .limit(6);
   return data;
 };
 

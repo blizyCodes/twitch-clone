@@ -24,15 +24,21 @@ const Sidebar = () => {
   }, [session]);
 
   return (
-    <div className="fixed w-16 xl:w-[15rem] h-screen p-2 bg-[#171718]">
+    <div className="fixed w-16 xl:w-[15rem] h-screen p-2 bg-[#171718] overflow-auto">
       <div className="flex items-center justify-between">
         <p className="hidden xl:flex uppercase py-4 pl-2 font-bold text-sm ">
           For You
         </p>
-        <p className="">
-          <RiMovieLine size={30} className="xl:hidden justify-center w-full" />
-        </p>
-        <BsArrowBarLeft size={20} className="hidden xl:flex cursor-pointer" />
+
+        <RiMovieLine
+          size={30}
+          className="xl:hidden justify-self-center w-full"
+        />
+
+        <BsArrowBarLeft
+          size={20}
+          className="hidden xl:flex cursor-pointer justify-self-end"
+        />
       </div>
       {recChannels.map((channel, index) => (
         <div
