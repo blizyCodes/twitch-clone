@@ -49,7 +49,6 @@ const Main = () => {
         <Loading />
       ) : (
         <div className="pl-[20px]">
-          {/* <SampleStream /> */}
           <Carousel streams={carouselStreams} />
           <LiveStreams streams={recStreams} />
           <CategoriesIconBar />
