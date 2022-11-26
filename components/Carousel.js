@@ -50,10 +50,10 @@ const Carousel = ({ streams }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <div className="absolute top-2 left-2 bg-red-600 uppercase px-4 py-2 rounded-lg ">
+            <div className="absolute top-2 left-2 bg-red-600 uppercase px-1  rounded-lg ">
               live
             </div>
-            <div className="absolute bottom-2 left-2 px-4 py-2 bg-black/60">
+            <div className="absolute bottom-2 left-2 px-2  bg-black/60">
               Viewers:{" "}
               {stream.viewers > 1000
                 ? (stream.viewers / 1000).toFixed(0) + "K"
