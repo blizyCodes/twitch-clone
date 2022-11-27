@@ -22,14 +22,17 @@ const LoggedOn = ({ supabase, session }) => {
     try {
       setLoading(true);
 
+      //get data from db
       const { data, error, status } = await supabase
         .from("profiles")
         .select("username, full_name, avatar_url")
         .eq("id", user.id)
         .single();
 
+      //error handle
       if (error && status != 406) throw error;
 
+      //set states accordingly
       if (data) {
         if (data.username) setloggedInUser(data.username);
         else setloggedInUser(data.full_name);
