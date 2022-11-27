@@ -129,7 +129,7 @@ const LoggedOn = ({ supabase, session }) => {
         <Loading />
       ) : (
         <div className="pt-[55px]">
-          {/* TOP PART */}
+          {/* TOP PART  up to sign out*/}
           <div className="m-5 flex flex-col justify-center items-center">
             {" "}
             <h2 className="text-2xl font-bold">
@@ -151,7 +151,7 @@ const LoggedOn = ({ supabase, session }) => {
               Sign out
             </button>
           </div>
-          {/* MIDDLE PART */}
+          {/* MIDDLE PART - username update*/}
           <h2 className="underline font-bold text-center pt-12 m-4 border-t border-gray-700">
             Update Username
           </h2>
@@ -182,7 +182,7 @@ const LoggedOn = ({ supabase, session }) => {
                   }}
                 />
               </div>
-              {/* BOTTOM PART */}
+              {/* BOTTOM PART - avatar update*/}
               <div className="pt-10">
                 <h2 className="underline font-bold text-center pt-12 m-4 border-t border-gray-700">
                   Upload Your avatar
