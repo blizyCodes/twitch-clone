@@ -9,6 +9,7 @@ I do not own any of the media used and they were used for the sole purpose of pr
 ## Link to deployed version
 
 https://twitch-clone-two.vercel.app/
+(may be offline at times due to Supabase's free tier limitations and the need to keep refreshing the project)
 
 ## Tech Stack
 
